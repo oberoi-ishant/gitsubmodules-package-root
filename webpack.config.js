@@ -16,7 +16,7 @@ module.exports = {
     alias: {
       'gitsubmodules-package-child': path.resolve(
         __dirname,
-        'submodules/gitsubmodules-package-child/src/'
+        'src/submodules/gitsubmodules-package-child/src/'
       )
     }
   },
