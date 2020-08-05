@@ -1,3 +1,0 @@
-[submodule "submodules/gitsubmodules-package-child"]
-	path = submodules/gitsubmodules-package-child
-	url = git@github.com:oberoi-ishant/gitsubmodules-package-child.git

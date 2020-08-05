@@ -78,7 +78,7 @@ export default class AppContainer extends React.Component {
     //   props
     // });
 
-    import('lodash-pack-one' /* webpackChunkName: 'my-app' */)
+    import('gitsubmodules-package-child/index.js')
       .then(module => {
         this.appOrComponentRef = module;
         const element = componentName

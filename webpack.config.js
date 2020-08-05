@@ -12,9 +12,12 @@ module.exports = {
   devtool: 'sourcemap',
   mode: "production",
   resolve: {
-    modules: [ path.join(__dirname, 'node_modules')],
+    modules: [path.join(__dirname, 'node_modules')],
     alias: {
-
+      'gitsubmodules-package-child': path.resolve(
+        __dirname,
+        'submodules/gitsubmodules-package-child/src/'
+      )
     }
   },
   module: {

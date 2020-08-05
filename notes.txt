@@ -83,5 +83,25 @@ with the --recursive flag if any submodules have nested
 submodules.
 
 
+As you can see there, Git went into the DbConnector module
+and pushed it before pushing the main project.
+If that submodule push fails for some reason,
+the main project push will also fail.
+You can make this behavior the default by doing
+git config push.recurseSubmodules on-demand.
+
+
+Submodule Foreach
+There is a foreach submodule command to run some arbitrary
+command in each submodule. This can be really helpful if
+you have a number of submodules in the same project.
+For example, let’s say we want to start a new feature or do a
+bugfix and we have work going on in several submodules.
+We can easily stash all the work in all our submodules.
+Example:
+1. git submodule foreach 'git stash'
+2. Then we can create a new branch and switch to it in all
+our submodules. git submodule foreach 'git checkout -b featureA'
+
 
 
