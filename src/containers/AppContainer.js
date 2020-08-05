@@ -78,19 +78,19 @@ export default class AppContainer extends React.Component {
     //   props
     // });
 
-    // import('lodash-pack-one' /* webpackChunkName: 'my-app' */)
-    //   .then(module => {
-    //     this.appOrComponentRef = module;
-    //     const element = componentName
-    //       ? this.getElement({ elemName: componentName })
-    //       : this.getElement({ elemName: appName });
-    //     this.appOrComponentRef.mountFn({
-    //       element,
-    //       componentName,
-    //       appName,
-    //       props
-    //     });
-    // });
+    import('lodash-pack-one' /* webpackChunkName: 'my-app' */)
+      .then(module => {
+        this.appOrComponentRef = module;
+        const element = componentName
+          ? this.getElement({ elemName: componentName })
+          : this.getElement({ elemName: appName });
+        this.appOrComponentRef.mountFn({
+          element,
+          componentName,
+          appName,
+          props
+        });
+    });
   }
 
   loadAppOrComponent1({ componentName, appName, props }) {
