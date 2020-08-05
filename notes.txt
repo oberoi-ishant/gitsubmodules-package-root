@@ -52,12 +52,18 @@ the submodule changes up as well, other people who try to
 check out our changes are going to be in trouble since they
 will have no way to get the submodule changes that are depended
 on. Those changes will only exist on our local copy.
-In order to make sure this doesn’t happen, you can ask Git to check that all your submodules have been pushed properly before pushing the main project.
+In order to make sure this doesn’t happen, you can ask Git to check that all your
+submodules have been pushed properly before pushing the main project.
 The git push command takes the --recurse-submodules
 argument which can be set to either “check” or “on-demand”.
 The “check” option will make push simply fail if any of
 the committed submodule changes haven’t been pushed.
 The other option is to use the “on-demand” value, which will try to do this for you.
+git push --recurse-submodules=check // check if submodule has any changes before push
+
+git push --recurse-submodules=on-demand // git will push the submodule
+change first then main repo change.
+Push on main fails if push on any submodule fails.
 
 
 

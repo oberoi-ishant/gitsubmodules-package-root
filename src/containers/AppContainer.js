@@ -78,6 +78,7 @@ export default class AppContainer extends React.Component {
     //   props
     // });
 
+    // Using alias from webpack.config.js
     import('gitsubmodules-package-child/index.js')
       .then(module => {
         this.appOrComponentRef = module;
