@@ -10,18 +10,54 @@ Add a submodule
 
 
 // Working on a Submodule
-So far, when we’ve run the git submodule update command to fetch changes from the 
-submodule repositories, Git would get the changes and update 
-the files in the subdirectory but will leave the sub-repository 
-in what’s called a “detached HEAD” state. 
-This means that there is no local working branch 
-(like master, for example) tracking changes. With no working 
-branch tracking changes, that means even if you commit changes 
-to the submodule, those changes will quite possibly be lost the next time 
-you run git submodule update. 
-You have to do some extra steps if you want changes in a 
+So far, when we’ve run the git submodule update command to fetch changes from the
+submodule repositories, Git would get the changes and update
+the files in the subdirectory but will leave the sub-repository
+in what’s called a “detached HEAD” state.
+This means that there is no local working branch
+(like master, for example) tracking changes. With no working
+branch tracking changes, that means even if you commit changes
+to the submodule, those changes will quite possibly be lost the next time
+you run git submodule update.
+You have to do some extra steps if you want changes in a
 submodule to be tracked.
 
+// Merge the submodule remote change to your local submodule
+git submodule update --remote --merge
+
+// If you also make a change to the submodule while working.
+// you need to merge or rebase your local change with what is there in the
+// submodule remote.
+1. cd submodule
+2. commit the change
+3. cd ..
+4. git submodule update --remote --rebase
+
+If you forget the --rebase or --merge, and just run
+git submodule update --remote
+Git will just update the submodule to whatever is on the
+server and reset your project to a detached HEAD state.
+If this happens, don’t worry, you can simply go back into
+the directory and check out your branch again
+(which will still contain your work) and merge or rebase
+origin/stable (or whatever remote branch you want) manually.
+
+If you made changes that conflict with something changed upstream,
+Git will let you know when you run the update.
+You can go into the submodule directory and fix the conflict just as you normally would.
+
+// Pushing submodule changes
+If we commit in the main project and push it up without pushing
+the submodule changes up as well, other people who try to
+check out our changes are going to be in trouble since they
+will have no way to get the submodule changes that are depended
+on. Those changes will only exist on our local copy.
+In order to make sure this doesn’t happen, you can ask Git to check that all your submodules have been pushed properly before pushing the main project.
+The git push command takes the --recurse-submodules
+argument which can be set to either “check” or “on-demand”.
+The “check” option will make push simply fail if any of
+the committed submodule changes haven’t been pushed.
+The other option is to use the “on-demand” value, which will try to do this for you.
 
 
 
@@ -32,18 +68,18 @@ submodule to be tracked.
 1. git clone --recurse-submodules
 
 // pull the upstream changes from project remote
- This is shown by the output of the git status command, 
- which shows the submodule is “modified”, and has “new commits”. 
- What’s more, the brackets showing the new commits 
- point left (<), indicating that these commits are recorded 
- in MainProject but are not present in the local DbConnector 
- checkout. 
+ This is shown by the output of the git status command,
+ which shows the submodule is “modified”, and has “new commits”.
+ What’s more, the brackets showing the new commits
+ point left (<), indicating that these commits are recorded
+ in MainProject but are not present in the local DbConnector
+ checkout.
  To finalize the update, you need to run git submodule update:
 2. git submodule update --init --recursive
-Note that to be on the safe side, you should run git submodule 
-update with the --init flag in case the MainProject 
-commits you just pulled added new submodules, and 
-with the --recursive flag if any submodules have nested 
+Note that to be on the safe side, you should run git submodule
+update with the --init flag in case the MainProject
+commits you just pulled added new submodules, and
+with the --recursive flag if any submodules have nested
 submodules.
 
 
