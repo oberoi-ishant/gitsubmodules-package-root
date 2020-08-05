@@ -30,12 +30,12 @@ export default class AppContainer extends React.Component {
 
   loadAppOrComponent({ componentName, appName, props }) {
     console.log('Hello');
-    // __non_webpack_require__(["lodash-pack-one"], (myApp) => {
+    // __non_webpack_require__(["gitsubmodules-package-child/index.js"], (myApp) => {
     //   console.log('MyApp', myApp);
     // });
 
     // webpack owns it.
-    // require.ensure(['lodash-pack-one'], (require) => {
+    // require.ensure(['gitsubmodules-package-child/index.js'], (require) => {
     //   this.appOrComponentRef = require('lodash-pack-one');
     //   console.log(this.appOrComponentRef);
     //   const element = componentName
@@ -50,7 +50,7 @@ export default class AppContainer extends React.Component {
     // });
 
     // AMD version.
-    // require(['lodash-pack-one'], (myApp) => {
+    // require(['gitsubmodules-package-child/index.js'], (myApp) => {
     //   this.appOrComponentRef = myApp;
     //   console.log(this.appOrComponentRef);
     //   const element = componentName
@@ -65,7 +65,7 @@ export default class AppContainer extends React.Component {
     // });
 
     // commonJS require.
-    // var myApp = require('lodash-pack-one');
+    // var myApp = require('gitsubmodules-package-child/index.js');
     // this.appOrComponentRef = myApp;
     // console.log(this.appOrComponentRef);
     // const element = componentName
@@ -79,7 +79,7 @@ export default class AppContainer extends React.Component {
     // });
 
     // Using alias from webpack.config.js
-    import('gitsubmodules-package-child/index.js')
+    import('gitsubmodules-package-child/index.js' /* webpackChunkName: 'package-child' */)
       .then(module => {
         this.appOrComponentRef = module;
         const element = componentName
@@ -95,19 +95,19 @@ export default class AppContainer extends React.Component {
   }
 
   loadAppOrComponent1({ componentName, appName, props }) {
-    // import('lodash-pack-one')
-    //   .then(module => {
-    //     this.appOrComponentRef = module;
-    //     const element = componentName
-    //       ? this.getElement({ elemName: componentName })
-    //       : this.getElement({ elemName: appName });
-    //     this.appOrComponentRef.mountFn({
-    //       element,
-    //       componentName,
-    //       appName,
-    //       props
-    //     });
-    // });
+    import('gitsubmodules-package-child/index.js')
+      .then(module => {
+        this.appOrComponentRef = module;
+        const element = componentName
+          ? this.getElement({ elemName: componentName })
+          : this.getElement({ elemName: appName });
+        this.appOrComponentRef.mountFn({
+          element,
+          componentName,
+          appName,
+          props
+        });
+    });
   }
 
   unloadAppOrComponent(name) {

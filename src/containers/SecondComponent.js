@@ -18,7 +18,7 @@ export default class SecondComponent extends React.Component {
   }
 
   loadAppOrComponent({ componentName, appName, props }) {
-    import('lodash-pack-one')
+    import('gitsubmodules-package-child/index.js')
       .then(module => {
         this.appOrComponentRef = module;
         const element = componentName
