@@ -1,0 +1,51 @@
+Add a submodule
+1. git submodule add https://github.com/chaconinc/DbConnector
+
+
+// get the submodule changes
+2. git submodule update --remote <submodule name optional>
+
+// set the branch of submodule you want to pull or work with
+3. git config -f .gitmodules submodule.DbConnector.branch stableBranch
+
+
+// Working on a Submodule
+So far, when we’ve run the git submodule update command to fetch changes from the 
+submodule repositories, Git would get the changes and update 
+the files in the subdirectory but will leave the sub-repository 
+in what’s called a “detached HEAD” state. 
+This means that there is no local working branch 
+(like master, for example) tracking changes. With no working 
+branch tracking changes, that means even if you commit changes 
+to the submodule, those changes will quite possibly be lost the next time 
+you run git submodule update. 
+You have to do some extra steps if you want changes in a 
+submodule to be tracked.
+
+
+
+
+
+
+// Collaborator, who pull the repo and starts collaborating.
+// clone a repo and update submodules recursively
+1. git clone --recurse-submodules
+
+// pull the upstream changes from project remote
+ This is shown by the output of the git status command, 
+ which shows the submodule is “modified”, and has “new commits”. 
+ What’s more, the brackets showing the new commits 
+ point left (<), indicating that these commits are recorded 
+ in MainProject but are not present in the local DbConnector 
+ checkout. 
+ To finalize the update, you need to run git submodule update:
+2. git submodule update --init --recursive
+Note that to be on the safe side, you should run git submodule 
+update with the --init flag in case the MainProject 
+commits you just pulled added new submodules, and 
+with the --recursive flag if any submodules have nested 
+submodules.
+
+
+
+
