@@ -7,7 +7,7 @@
     "bin": "./node_modules/.bin"
   },
   "scripts": {
-    "test": "echo \"**************** Test Script: Main Repository**************\" && exit 1",
+    "test": "echo \"**************** Test Script: Main Repository**************\" && exit 0",
     "start": "./node_modules/.bin/webpack-dev-server",
     "stats": "$npm_package_config_bin/webpack --config webpack.config.js --json > stats.json",
     "build": "webpack --config webpack.config.js"
