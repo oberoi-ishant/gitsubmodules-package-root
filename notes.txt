@@ -66,9 +66,6 @@ change first then main repo change.
 Push on main fails if push on any submodule fails.
 
 
-
-
-
 // Collaborator, who pull the repo and starts collaborating.
 // clone a repo and update submodules recursively
 1. git clone --recurse-submodules

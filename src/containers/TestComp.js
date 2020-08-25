@@ -1,23 +1,98 @@
 import React from 'react';
-import { map as _map } from 'lodash';
-
 export default class TestComp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      numbers: [1,2,3,4]
-    }
+    this.appOrComponentRef = null;
   }
 
-  myFunc () {
-    return _map(this.state.numbers, (num) => num * 3).join(', ')
+  getElement({ elemName }) {
+    let packOne = document.getElementById(elemName);
+    if (!packOne) {
+      packOne = document.createElement('div');
+      packOne.id = elemName;
+      const rootApp = document.getElementById('app');
+      rootApp.appendChild(packOne);
+    }
+    return packOne;
+  }
+
+  loadAppOrComponent(e, { componentName, appName, props }) {
+    e.preventDefault();
+    import('gitsubmodules-package-child/index.js')
+      .then(module => {
+        this.appOrComponentRef = module;
+        const element = componentName
+          ? this.getElement({ elemName: componentName })
+          : this.getElement({ elemName: appName });
+        this.appOrComponentRef.mountFn({
+          element,
+          componentName,
+          appName,
+          props
+        });
+        element.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  // loadAppOrComponent1({ componentName, appName, props }) {
+  //   import('gitsubmodules-package-child/index.js')
+  //     .then(module => {
+  //       this.appOrComponentRef = module;
+  //       const element = componentName
+  //         ? this.getElement({ elemName: componentName })
+  //         : this.getElement({ elemName: appName });
+  //       this.appOrComponentRef.mountFn({
+  //         element,
+  //         componentName,
+  //         appName,
+  //         props
+  //       });
+  //   });
+  // }
+
+  unloadAppOrComponent(e, name) {
+    e.preventDefault();
+    const elem = this.getElement({elemName: name});
+    if (this.appOrComponentRef) {
+      this.appOrComponentRef.unMountFn(elem);
+    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   render () {
     return (
-      <div>
-        <div>Test Component</div>
-        <div>{ this.myFunc() }</div>
+      <div class="comp-test-core">
+        <h2 class="heading-secondary">Dark: Quotes</h2>
+        <p class="text u-margin-bottom-medium">
+          "There are things out there that our little minds will never comprehend" – H.G. Tannhaus
+        </p>
+        <p class="text u-margin-bottom-medium">
+          "If I now change my past, I will change who I am right now" — The Stranger
+        </p>
+        <div class="comp-test-core__btns">
+          <a
+            class="btn btn--green u-margin-right-medium"
+            href="#" onClick={ (e) => this.loadAppOrComponent(e,
+              {
+                componentName: 'MyPage',
+                props: {
+                  name: 'MyPageComponent',
+                  parent: 'HBO'
+              }})
+            }>
+            Get More
+          </a>
+          <a
+            class="btn btn--green"
+            href="#"
+            onClick={
+              (e) => this.unloadAppOrComponent(e, 'MyPage') }
+          >I'm done</a>
+        </div>
+        <section class="subapp u-margin-medium" id="MyPage"></section>
       </div>
     );
   }
