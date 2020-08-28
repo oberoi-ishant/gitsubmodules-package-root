@@ -65,7 +65,7 @@ export default class TestComp extends React.Component {
   render () {
     return (
       <div class="comp-test-core">
-        <h2 class="heading-secondary">Dark: Quotes</h2>
+        <h2 class="heading-secondary">Famous Quotes</h2>
         <p class="text u-margin-bottom-medium">
           "There are things out there that our little minds will never comprehend" – H.G. Tannhaus
         </p>

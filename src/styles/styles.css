@@ -187,3 +187,7 @@ body {
 .text {
   font-size: 2rem;
 }
+
+.subscription {
+  color: #55c57a;
+}
