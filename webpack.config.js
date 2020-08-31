@@ -17,6 +17,10 @@ module.exports = {
       'gitsubmodules-package-child': path.resolve(
         __dirname,
         'src/submodules/gitsubmodules-package-child/src/'
+      ),
+      'gitsubmodule-package-utils': path.resolve(
+        __dirname,
+        'src/submodules/gitsubmodule-package-utils/'
       )
     }
   },

@@ -34,22 +34,6 @@ export default class TestComp extends React.Component {
     });
   }
 
-  // loadAppOrComponent1({ componentName, appName, props }) {
-  //   import('gitsubmodules-package-child/index.js')
-  //     .then(module => {
-  //       this.appOrComponentRef = module;
-  //       const element = componentName
-  //         ? this.getElement({ elemName: componentName })
-  //         : this.getElement({ elemName: appName });
-  //       this.appOrComponentRef.mountFn({
-  //         element,
-  //         componentName,
-  //         appName,
-  //         props
-  //       });
-  //   });
-  // }
-
   unloadAppOrComponent(e, name) {
     e.preventDefault();
     const elem = this.getElement({elemName: name});
@@ -80,7 +64,7 @@ export default class TestComp extends React.Component {
                 componentName: 'MyPage',
                 props: {
                   name: 'MyPageComponent',
-                  parent: 'HBO'
+                  parent: 'Quotes Mantra'
               }})
             }>
             Get More
